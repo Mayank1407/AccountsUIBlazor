@@ -1,0 +1,75 @@
+﻿@page "/AddCustomer"
+<h3>Add Customer</h3>
+
+<div class="container-fluid">
+    <RadzenCard>
+    <div class="row px-3">
+        <div class="col-md-12 col-lg-12 p-3">
+            
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Nick Name</RadzenText>
+                <RadzenTextBox Placeholder="Nick Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+           
+        </div>
+        <div class="col-md-12 col-lg-12 p-3">
+           
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">First Name</RadzenText>
+                <RadzenTextBox Placeholder="First Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+           
+        </div>
+         <div class="col-md-12 col-lg-12 p-3">
+            
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Middle Name</RadzenText>
+                <RadzenTextBox Placeholder="Middle Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+            
+        </div>
+
+        <div class="col-md-12 col-lg-12 p-3">
+     
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Last Name</RadzenText>
+                <RadzenTextBox Placeholder="Last Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+     
+        </div>
+
+         <div class="col-md-12 col-lg-12 p-3">
+     
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Mobile Number</RadzenText>
+                <RadzenTextBox Placeholder="Mobile Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+     
+        </div>
+
+
+         <div class="col-md-12 col-lg-12 p-3">
+            
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Alternate Mobile Number</RadzenText>
+                <RadzenTextBox Placeholder="Alternate Mobile Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+            
+        </div>
+
+        <div class="col-md-12 col-lg-12 p-3">
+            
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Home Phone Number</RadzenText>
+                <RadzenTextBox Placeholder="Home Phone Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+            
+        </div>
+
+        <div class="col-md-12 col-lg-12 p-3">
+            
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Office Phone Number</RadzenText>
+                <RadzenTextBox Placeholder="Office Phone Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
+            
+        </div>
+
+        </div>
+         </RadzenCard>
+        </div>
+
+@code {
+    string value;
+
+    //EventConsole console;
+
+    void OnChange(string value, string name)
+    {
+        //console.Log($"{name} value changed to {value}");
+    }
+}
