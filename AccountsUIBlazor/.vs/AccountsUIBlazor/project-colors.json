@@ -1,0 +1,51 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "9b86713e-6cbf-45cb-948b-5b6cc2988f41": {
+      "ProjectGuid": "9b86713e-6cbf-45cb-948b-5b6cc2988f41",
+      "DisplayName": "AccountsUIBlazor",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "0ac63ce5-107e-4f59-bc7f-74bebbaf49a6": {
+      "ProjectGuid": "0ac63ce5-107e-4f59-bc7f-74bebbaf49a6",
+      "DisplayName": "AccountApi",
+      "ColorIndex": 1
+    },
+    "b2b15c44-bf1c-4aed-b03b-2f137ad6f9f1": {
+      "ProjectGuid": "b2b15c44-bf1c-4aed-b03b-2f137ad6f9f1",
+      "DisplayName": "AccountApi.Application",
+      "ColorIndex": 2
+    },
+    "4ba93ef5-ea09-42b7-8640-66810f230620": {
+      "ProjectGuid": "4ba93ef5-ea09-42b7-8640-66810f230620",
+      "DisplayName": "AccontApi.Core",
+      "ColorIndex": 3
+    },
+    "a643e65e-e09f-401f-9a77-178348a8c579": {
+      "ProjectGuid": "a643e65e-e09f-401f-9a77-178348a8c579",
+      "DisplayName": "AccountApi.Infrastructure",
+      "ColorIndex": 4
+    },
+    "b2857e75-44c8-4bbd-911e-c3320d7924c2": {
+      "ProjectGuid": "b2857e75-44c8-4bbd-911e-c3320d7924c2",
+      "DisplayName": "AccountApi.Logging",
+      "ColorIndex": 5
+    },
+    "8bf81cb9-959c-49de-8cd9-7803bc647f3d": {
+      "ProjectGuid": "8bf81cb9-959c-49de-8cd9-7803bc647f3d",
+      "DisplayName": "AccountApi.Sql",
+      "ColorIndex": 6
+    },
+    "643675c7-5ce7-405f-92ae-0fcd82620e8a": {
+      "ProjectGuid": "643675c7-5ce7-405f-92ae-0fcd82620e8a",
+      "DisplayName": "AccountApi.Test",
+      "ColorIndex": 7
+    }
+  },
+  "NextColorIndex": 8
+}

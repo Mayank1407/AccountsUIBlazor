@@ -27,3 +27,4 @@ C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor\obj\Debug\net6.0\ref\AccountsUIBlazor.dll
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor\obj\Debug\net6.0\AccountsUIBlazor.pdb
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor\obj\Debug\net6.0\AccountsUIBlazor.genruntimeconfig.cache
+C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor\obj\Debug\net6.0\AccountsUIBlazor.csproj.AssemblyReference.cache

@@ -59,6 +59,13 @@
             
         </div>
 
+        <div class="col-12">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <RadzenButton Shade="Shade.Light" Click=@(args => AddCust("Primary button")) Text="Add Customer" ButtonStyle="ButtonStyle.Primary" />
+            </div>
+        </div>
+
         </div>
          </RadzenCard>
         </div>
@@ -71,5 +78,10 @@
     void OnChange(string value, string name)
     {
         //console.Log($"{name} value changed to {value}");
+    }
+
+    private void AddCust(string text)
+    {
+        // NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Info, Summary = "Button Clicked", Detail = text });
     }
 }
