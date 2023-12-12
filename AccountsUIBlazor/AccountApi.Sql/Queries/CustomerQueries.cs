@@ -15,8 +15,32 @@ namespace AccountApi.Sql.Queries
 		public static string CustomerById => "SELECT * FROM [Customer] (NOLOCK) WHERE [CustomerId] = @CustomerId";
 
 		public static string AddCustomer =>
-			@"INSERT INTO [Customer] ([FirstName], [LastName], [Email], [PhoneNumber]) 
-				VALUES (@FirstName, @LastName, @Email, @PhoneNumber)";
+            @"INSERT INTO [dbo].[Customer]
+           ([FirstName]
+           ,[MiddleName]
+           ,[NickName]
+           ,[LastName]
+           ,[Mobile]
+           ,[ReferredBy]
+           ,[CreatedBy]
+           ,[ModifiedDate]
+           ,[CreatedDate]
+           ,[ModifiedBy]
+           ,[Url]
+           ,[IsActive])
+     VALUES
+           (@FirstName
+           ,@MiddleName
+           ,@NickName
+           ,@LastName
+           ,@Mobile
+           ,@ReferredBy
+           ,@CreatedBy
+           ,@ModifiedDate
+           ,@CreatedDate
+           ,@ModifiedBy
+           ,@Url
+           ,@IsActive)";
 
 		public static string UpdateCustomer =>
 			@"UPDATE [Customer] 

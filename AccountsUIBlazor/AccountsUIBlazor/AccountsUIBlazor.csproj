@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Radzen.Blazor" Version="4.15.12" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccountApi.Application\AccountApi.Application.csproj" />
+    <ProjectReference Include="..\AccountApi.Infrastructure\AccountApi.Infrastructure.csproj" />
+    <ProjectReference Include="..\AccountApi.Logging\AccountApi.Logging.csproj" />
   </ItemGroup>
 
 </Project>

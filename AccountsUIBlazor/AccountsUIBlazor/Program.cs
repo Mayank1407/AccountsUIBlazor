@@ -1,3 +1,4 @@
+using AccountsUIBlazor;
 using AccountsUIBlazor.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -9,8 +10,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-var app = builder.Build();
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services); // calling ConfigureServices method
 
+
+var app = builder.Build();
+startup.Configure(app, builder.Environment); // calling Configure method
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

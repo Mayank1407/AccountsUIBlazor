@@ -2,7 +2,6 @@ C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\b
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\bin\Debug\net6.0\AccountApi.Sql.dll
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\bin\Debug\net6.0\ref\AccountApi.Sql.dll
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\bin\Debug\net6.0\AccountApi.Sql.pdb
-C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.csproj.AssemblyReference.cache
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.AssemblyInfoInputs.cache
 C:\Users\SANTOSH\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.AssemblyInfo.cs
