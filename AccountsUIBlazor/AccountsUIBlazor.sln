@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Sql", "AccountAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Test", "AccountApi.Test\AccountApi.Test.csproj", "{643675C7-5CE7-405F-92AE-0FCD82620E8A}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AccountsDbProject", "AccountsDbProject\AccountsDbProject.sqlproj", "{9355543B-F08E-490B-81C7-EFDDE99485FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,12 @@ Global
 		{643675C7-5CE7-405F-92AE-0FCD82620E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{643675C7-5CE7-405F-92AE-0FCD82620E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{643675C7-5CE7-405F-92AE-0FCD82620E8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
