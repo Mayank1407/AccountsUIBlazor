@@ -1,87 +1,131 @@
 ﻿@page "/AddCustomer"
-<h3>Add Customer</h3>
 
-<div class="container-fluid">
-    <RadzenCard>
-    <div class="row px-3">
-        <div class="col-md-12 col-lg-12 p-3">
-            
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Nick Name</RadzenText>
-                <RadzenTextBox Placeholder="Nick Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-           
-        </div>
-        <div class="col-md-12 col-lg-12 p-3">
-           
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">First Name</RadzenText>
-                <RadzenTextBox Placeholder="First Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-           
-        </div>
-         <div class="col-md-12 col-lg-12 p-3">
-            
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Middle Name</RadzenText>
-                <RadzenTextBox Placeholder="Middle Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-            
-        </div>
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
 
-        <div class="col-md-12 col-lg-12 p-3">
+<EditForm Model="CustomerModel" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    @* <div>
+            <label id="firstname">First name:</label> 
+        <InputText @bind-Value="FormModel.FirstName" type="text" id="FirstName" />
+        <label id="lastname">last name:</label>
+        <InputText @bind-Value="FormModel.LastName" type="text" id="LastName" />
+    </div>
+    <button class="btn btn-primary">Submit</button> *@
+
      
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Last Name</RadzenText>
-                <RadzenTextBox Placeholder="Last Name" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-     
-        </div>
-
-         <div class="col-md-12 col-lg-12 p-3">
-     
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Mobile Number</RadzenText>
-                <RadzenTextBox Placeholder="Mobile Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-     
-        </div>
-
-
-         <div class="col-md-12 col-lg-12 p-3">
-            
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Alternate Mobile Number</RadzenText>
-                <RadzenTextBox Placeholder="Alternate Mobile Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-            
-        </div>
-
-        <div class="col-md-12 col-lg-12 p-3">
-            
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Home Phone Number</RadzenText>
-                <RadzenTextBox Placeholder="Home Phone Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-            
-        </div>
-
-        <div class="col-md-12 col-lg-12 p-3">
-            
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Office Phone Number</RadzenText>
-                <RadzenTextBox Placeholder="Office Phone Number" Change=@(args => OnChange(args, "TextBox with placeholder")) class="w-100" />
-            
-        </div>
-
-        <div class="col-12">
-            <div class="col-6"></div>
-            <div class="col-6">
-                <RadzenButton Shade="Shade.Light" Click=@(args => AddCust("Primary button")) Text="Add Customer" ButtonStyle="ButtonStyle.Primary" />
+    <div class="row">
+            <div class="col-md-8"> 
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="firstName">First Name #</label>
+                        <input type="text" class="form-control" id="firstName" @bind-value="@CustomerModel.FirstName" placeholder="enter first name..." />
+                        <ValidationMessage For="@(()=>CustomerModel.FirstName)" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="lastName">Last Name #</label>
+                        <input type="text" class="form-control" id="lastName" @bind-value="@CustomerModel.LastName" placeholder="enter last name..." />
+                        <ValidationMessage For="@(()=>CustomerModel.LastName)" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="MiddleName">Middle Name #</label>
+                        <input type="text" class="form-control" id="MiddleName" @bind-value="@CustomerModel.MiddleName" placeholder="enter Middle name..." />
+                        <ValidationMessage For="@(()=>CustomerModel.MiddleName)" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="email">Email Id #</label>
+                        <input type="text" class="form-control" id="email" @bind-value="@CustomerModel.Email" placeholder="email..." />
+                        <ValidationMessage For="@(()=>CustomerModel.Email)" />
+                    </div>
+                </div>
+                 <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="ElectronicPaymentId">Electronic Payment Id #</label>
+                        <input type="text" class="form-control" id="ElectronicPaymentId" @bind-value="@CustomerModel.ElectronicPaymentId" />
+                        <ValidationMessage For="@(()=>CustomerModel.ElectronicPaymentId)" />
+                    </div>
+                </div>
+                 <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="Mobile">Mobile #</label>
+                        <input type="text" class="form-control" id="Mobile" @bind-value="@CustomerModel.Mobile" />
+                        <ValidationMessage For="@(()=>CustomerModel.Mobile)" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="ReferredBy">ReferredBy #</label>
+                        <input type="text" class="form-control" id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
+                        <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" />
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Customer</button>
             </div>
+            @* @if (displayValidationErrorMessages)
+            {
+                <div class="col-md-4" style="margin-top:10px">
+                    <label>Validation Messages: </label>
+                    <ValidationSummary />
+                </div>
+            } *@
         </div>
+</EditForm>
 
-        </div>
-         </RadzenCard>
-        </div>
 
 @code {
-    string value;
-
-    //EventConsole console;
-
-    void OnChange(string value, string name)
+    public UICustomer CustomerModel { get; set; } = new();
+    public string Log { get; set; } = "";
+    private UICustomer UICustomer;
+     bool displayValidationErrorMessages = false;
+    public void InvalidSubmit(EditContext formContext)
     {
-        //console.Log($"{name} value changed to {value}");
+        Log += "OnInvalidSubmit fired. ";
     }
 
-    private void AddCust(string text)
+    // public void ValidSubmit(EditContext formContext)
+    // {
+    //     Log += "OnValidSubmit fired. ";
+    // }
+
+    public void Submit(EditContext formContext)
     {
-        // NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Info, Summary = "Button Clicked", Detail = text });
+        var form = (UICustomer)formContext.Model;
+        Log += "OnSubmit fired. ";
     }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UICustomer = (UICustomer)formContext.Model;
+
+        try
+        {
+            // var serialized = JsonConvert.SerializeObject(UICustomer);
+            // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+            //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
+
+            var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
+            Console.WriteLine(obj);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+    
+
 }

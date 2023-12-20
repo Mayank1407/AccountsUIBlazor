@@ -133,17 +133,17 @@
         }
       },
       "System.Security.Principal.Windows/4.7.0": {},
-      "AccontApi.Core/1.0.0": {
-        "runtime": {
-          "AccontApi.Core.dll": {}
-        }
-      },
       "AccountApi.Application/1.0.0": {
         "dependencies": {
-          "AccontApi.Core": "1.0.0"
+          "AccountApi.Core": "1.0.0"
         },
         "runtime": {
           "AccountApi.Application.dll": {}
+        }
+      },
+      "AccountApi.Core/1.0.0": {
+        "runtime": {
+          "AccountApi.Core.dll": {}
         }
       },
       "AccountApi.Sql/1.0.0": {
@@ -257,12 +257,12 @@
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
     },
-    "AccontApi.Core/1.0.0": {
+    "AccountApi.Application/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "AccountApi.Application/1.0.0": {
+    "AccountApi.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

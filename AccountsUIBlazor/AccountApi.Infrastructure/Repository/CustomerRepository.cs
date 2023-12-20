@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AccountApi.Sql.Queries;
 using AccountApi.Application.Interfaces;
+using AccountApi.Core;
 
 namespace AccountApi.Infrastructure.Repository
 {

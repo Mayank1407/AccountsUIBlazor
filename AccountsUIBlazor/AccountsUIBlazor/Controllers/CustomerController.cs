@@ -1,7 +1,10 @@
 ﻿using AccontApi.Core;
 using AccountApi.Application.Interfaces;
+using AccountApi.Core;
 using AccountApi.Logging;
 using AccountsUIBlazor.Data;
+using AccountsUIBlazor.UIModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -9,13 +12,15 @@ using System.Data.SqlClient;
 
 namespace AccountsUIBlazor.Controller
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CustomerController : BaseApiController
     {
         #region ===[ Private Members ]=============================================================
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _IMapper;
+
 
         #endregion
 
@@ -24,11 +29,13 @@ namespace AccountsUIBlazor.Controller
         /// <summary>
         /// Initialize CustomerController by injecting an object type of IUnitOfWork
         /// </summary>
-        public CustomerController(IUnitOfWork unitOfWork)
+        public CustomerController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
+            this._IMapper = Mapper;
+
         }
-         
+
         #endregion
 
         #region ===[ Public Methods ]==============================================================
@@ -61,7 +68,7 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet("{id}")]
-        public async Task<ApiResponse<Customer>> GetById(int id)
+        public async  Task<ApiResponse<Customer>> GetById(int id)
         {
 
             var apiResponse = new ApiResponse<Customer>();
@@ -89,15 +96,18 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpPost]
-        public async Task<ApiResponse<string>> Add(Customer Customer)
+        //[Route("AddCustomer")]
+        public async Task<IActionResult> Add(UICustomer Customer)
         {
+          //var results =   new ApiResponse<List<Customer>>();
             var apiResponse = new ApiResponse<string>();
-
+            Customer customer = _IMapper.Map<Customer>(Customer);
             try
             {
-                var data = await _unitOfWork.Customers.AddAsync(Customer);
+                var data = await _unitOfWork.Customers.AddAsync(customer);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
+                //results.Result = data
             }
             catch (Exception ex)
             {
@@ -112,7 +122,7 @@ namespace AccountsUIBlazor.Controller
             //    Logger.Instance.Error("Exception:", ex);
             //}
 
-            return apiResponse;
+            return Ok(apiResponse);
         }
 
         [HttpPut]

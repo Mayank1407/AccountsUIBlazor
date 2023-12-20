@@ -8,15 +8,15 @@
     ".NETCoreApp,Version=v6.0": {
       "AccountApi.Application/1.0.0": {
         "dependencies": {
-          "AccontApi.Core": "1.0.0"
+          "AccountApi.Core": "1.0.0"
         },
         "runtime": {
           "AccountApi.Application.dll": {}
         }
       },
-      "AccontApi.Core/1.0.0": {
+      "AccountApi.Core/1.0.0": {
         "runtime": {
-          "AccontApi.Core.dll": {}
+          "AccountApi.Core.dll": {}
         }
       }
     }
@@ -27,7 +27,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AccontApi.Core/1.0.0": {
+    "AccountApi.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountsUIBlazor", "Account
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Application", "AccountApi.Application\AccountApi.Application.csproj", "{B2B15C44-BF1C-4AED-B03B-2F137AD6F9F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccontApi.Core", "AccontApi.Core\AccontApi.Core.csproj", "{4BA93EF5-EA09-42B7-8640-66810F230620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Core", "AccontApi.Core\AccountApi.Core.csproj", "{4BA93EF5-EA09-42B7-8640-66810F230620}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Infrastructure", "AccountApi.Infrastructure\AccountApi.Infrastructure.csproj", "{A643E65E-E09F-401F-9A77-178348A8C579}"
 EndProject

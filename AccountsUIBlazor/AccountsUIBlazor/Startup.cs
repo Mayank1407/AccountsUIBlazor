@@ -1,5 +1,7 @@
 ﻿using AccountApi.Application.Interfaces;
 using AccountApi.Infrastructure.Repository;
+using AccountsUIBlazor.UIModels;
+using AutoMapper;
 using Microsoft.OpenApi.Models;
 
 namespace AccountsUIBlazor
@@ -40,8 +42,27 @@ namespace AccountsUIBlazor
                                       .AllowAnyMethod());
             });
 
+            var mapperConfiguration = new MapperConfiguration(configuration =>
+            {
+                configuration.AddProfile(new MappingProfile());
+            });
+
+            var mapper = mapperConfiguration.CreateMapper();
+
+            services.AddSingleton(mapper);
+
+
             // Add MVC or API controllers
             services.AddControllers();
+            //services.AddHttpClient();
+            services.AddScoped(sp =>
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("https://localhost:7207/");
+                return client;
+            });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
