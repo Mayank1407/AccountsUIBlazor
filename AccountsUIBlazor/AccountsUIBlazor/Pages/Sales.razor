@@ -1,0 +1,116 @@
+﻿@page "/AddSales"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+<h3>Sales</h3>
+
+@* <div class="form-group">
+    <label for="title">Price</label>
+    <InputText id="title" @bind-Value="SelectedCoffee.Title" placeholder="Coffee title..." class="form-control" />
+</div>
+<div class="form-group">
+    <label for="title">Quantity</label>
+    <InputText id="title" @bind-Value="SelectedCoffee.Title" placeholder="Coffee title..." class="form-control" />
+</div>
+<div class="form-group">
+    <label for="title">total</label>
+    <InputText id="title" @bind-Value="SelectedCoffee.Title" placeholder="Coffee title..." class="form-control" />
+</div> *@
+<EditForm Model="UISales" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+<div class="col-md-8">
+        From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UICalenderModel.FromDate" />
+</div>
+<div class="col-md-8">
+        To Date<RadzenDatePicker style="width: 100%;" Name="Todate" @bind-Value="UISales.UICalenderModel.ToDate" Change="DateSelection" />
+</div>
+<div>
+        <RadzenAutoComplete Placeholder="Select vendor stock in..." Data="@UISales.UIStockInList" TextProperty="LoadName" ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
+</div>
+<div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
+</div>
+</EditForm>
+@code {
+
+    
+    public UISales UISales { get; set; } = new();
+    public UISalesStockInData UIStockIn { get; set; } = new();
+    
+    public string Log { get; set; } = "";
+
+   
+    void OnChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UIStockIn.StockInId = UISales.UIStockInList.Where(e => e.LoadName.Equals(value))
+                              .Select(p => p.StockInId).FirstOrDefault();
+        GetVendorId(UIStockIn.StockInId);
+        // UIStockIn.VendorName = str.ToString();
+
+        // Console.WriteLine($"Value changed to {str}");
+    }
+
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+        GetStockInData();
+    }
+
+    public async Task GetStockInData()
+    {
+        // Log += "DateSelection fired. ";
+        var results = await HttpClient.PostAsJsonAsync($"Sales/PostStockInsData", UISales.UICalenderModel);
+        var APIreturn = JsonConvert.DeserializeObject<List<UISalesStockInData>> (await results.Content.ReadAsStringAsync());
+        Console.WriteLine(APIreturn);
+        foreach (var item in APIreturn)
+        {
+            UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
+        }
+    }
+    public async Task GetVendorId(int StockInId)
+    {
+       
+        int vendorId = 0;
+        var id = await HttpClient.GetStringAsync($"Sales/GetVendorId?id={StockInId}");
+        int.TryParse(id, out vendorId);
+        UIStockIn.VendorId = vendorId;
+       
+        
+    }
+
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomer)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UISales = (UISales)formContext.Model;
+
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"Customer", UISales);
+            Console.WriteLine(obj);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+}
+ 

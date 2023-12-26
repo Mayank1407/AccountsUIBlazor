@@ -16,16 +16,13 @@ namespace AccountsUIBlazor.Controller
     [ApiController]
     public class CustomerController : BaseApiController
     {
-        #region ===[ Private Members ]=============================================================
+       
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
 
 
-        #endregion
-
-        #region ===[ Constructor ]=================================================================
-
+        
         /// <summary>
         /// Initialize CustomerController by injecting an object type of IUnitOfWork
         /// </summary>
@@ -36,10 +33,7 @@ namespace AccountsUIBlazor.Controller
 
         }
 
-        #endregion
-
-        #region ===[ Public Methods ]==============================================================
-
+      
         [HttpGet]
         public async Task<ApiResponse<List<Customer>>> GetAll()
         {
@@ -99,15 +93,17 @@ namespace AccountsUIBlazor.Controller
         //[Route("AddCustomer")]
         public async Task<IActionResult> Add(UICustomer Customer)
         {
-          //var results =   new ApiResponse<List<Customer>>();
+          
             var apiResponse = new ApiResponse<string>();
             Customer customer = _IMapper.Map<Customer>(Customer);
+            customer.IsActive = true;
+
             try
             {
                 var data = await _unitOfWork.Customers.AddAsync(customer);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
-                //results.Result = data
+               
             }
             catch (Exception ex)
             {
@@ -179,6 +175,6 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-        #endregion
+        
     }
 }

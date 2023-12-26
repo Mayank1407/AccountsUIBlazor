@@ -1,0 +1,120 @@
+﻿@page "/AddVendor"
+
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+
+<EditForm Model="VendorModel" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+   
+
+     
+    <div class="row">
+            <div class="col-md-8"> 
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="firstName">First Name #</label>
+                    <input type="text" class="form-control" id="firstName" @bind-value="@VendorModel.FirstName" placeholder="enter first name..." />
+                       
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="lastName">Last Name #</label>
+                    <input type="text" class="form-control" id="lastName" @bind-value="@VendorModel.LastName" placeholder="enter last name..." />
+                      
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="MiddleName">Middle Name #</label>
+                    <input type="text" class="form-control" id="MiddleName" @bind-value="@VendorModel.MiddleName" placeholder="enter Middle name..." />
+                       
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="email">Email Id #</label>
+                    <input type="text" class="form-control" id="email" @bind-value="@VendorModel.Email" placeholder="email..." />
+                       
+                    </div>
+                </div>
+                 <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="ElectronicPaymentId">Electronic Payment Id #</label>
+                    <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@VendorModel.ElectronicPaymentId" />
+                       
+                    </div>
+                </div>
+                 <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="Mobile">Mobile #</label>
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.Mobile" />
+                       
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="ReferredBy">ReferredBy #</label>
+                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@VendorModel.ReferredBy" />
+                       
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Vendor</button>
+            </div>
+            
+        </div>
+</EditForm>
+
+
+@code {
+    public UIVendor VendorModel { get; set; } = new();
+    public string Log { get; set; } = "";
+    private UIVendor UIVendor;
+     bool displayValidationErrorMessages = false;
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    // public void ValidSubmit(EditContext formContext)
+    // {
+    //     Log += "OnValidSubmit fired. ";
+    // }
+
+    public void Submit(EditContext formContext)
+    {
+        var form = (UIVendor)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UIVendor = (UIVendor)formContext.Model;
+
+        try
+        {
+            // var serialized = JsonConvert.SerializeObject(UICustomer);
+            // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+            //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
+
+            var obj = await HttpClient.PostAsJsonAsync($"Vendor/AddVendor", UIVendor);
+            Console.WriteLine(obj);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+    
+
+}

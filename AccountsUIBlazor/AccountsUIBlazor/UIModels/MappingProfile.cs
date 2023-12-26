@@ -8,6 +8,22 @@ namespace AccountsUIBlazor.UIModels
         public MappingProfile()
         {
             CreateMap<UICustomer, Customer>().ReverseMap();
+            CreateMap<UIVendor, Vendor>().ReverseMap();
+           // CreateMap<VendorNames, Vendor>().ReverseMap();
+            CreateMap<VendorNames,Vendor > ()
+    .ForMember(dest => dest.VendorId, opt => opt.MapFrom(src => src.VendorId))
+    .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.VendorName));
+
+
+            CreateMap<UISales, Sales>().ReverseMap();
+            CreateMap<UIStockIn, UISalesStockInData>().ReverseMap();
+            //CreateMap<UICustomer, Customer>().ReverseMap();
+            //CreateMap<UICustomer, Customer>().ReverseMap();
+            //CreateMap<UICustomer, Customer>().ReverseMap();
+            //CreateMap<UICustomer, Customer>().ReverseMap();
+            //CreateMap<UICustomer, Customer>().ReverseMap();
+            //CreateMap<UICustomer, Customer>().ReverseMap();
+
 
         }
     }

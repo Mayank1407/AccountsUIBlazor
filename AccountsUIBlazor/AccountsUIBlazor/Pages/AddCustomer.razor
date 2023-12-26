@@ -26,61 +26,55 @@
                     <div class="col-md-12">
                         <label for="firstName">First Name #</label>
                         <input type="text" class="form-control" id="firstName" @bind-value="@CustomerModel.FirstName" placeholder="enter first name..." />
-                        <ValidationMessage For="@(()=>CustomerModel.FirstName)" />
+                        @* <ValidationMessage For="@(()=>CustomerModel.FirstName)" /> *@
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="lastName">Last Name #</label>
                         <input type="text" class="form-control" id="lastName" @bind-value="@CustomerModel.LastName" placeholder="enter last name..." />
-                        <ValidationMessage For="@(()=>CustomerModel.LastName)" />
+                       @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="MiddleName">Middle Name #</label>
                         <input type="text" class="form-control" id="MiddleName" @bind-value="@CustomerModel.MiddleName" placeholder="enter Middle name..." />
-                        <ValidationMessage For="@(()=>CustomerModel.MiddleName)" />
+                        @* <ValidationMessage For="@(()=>CustomerModel.MiddleName)" /> *@
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="email">Email Id #</label>
                         <input type="text" class="form-control" id="email" @bind-value="@CustomerModel.Email" placeholder="email..." />
-                        <ValidationMessage For="@(()=>CustomerModel.Email)" />
+                        @* <ValidationMessage For="@(()=>CustomerModel.Email)" /> *@
                     </div>
                 </div>
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="ElectronicPaymentId">Electronic Payment Id #</label>
-                        <input type="text" class="form-control" id="ElectronicPaymentId" @bind-value="@CustomerModel.ElectronicPaymentId" />
-                        <ValidationMessage For="@(()=>CustomerModel.ElectronicPaymentId)" />
+                    <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@CustomerModel.ElectronicPaymentId" />
+                        @* <ValidationMessage For="@(()=>CustomerModel.ElectronicPaymentId)" /> *@
                     </div>
                 </div>
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="Mobile">Mobile #</label>
-                        <input type="text" class="form-control" id="Mobile" @bind-value="@CustomerModel.Mobile" />
-                        <ValidationMessage For="@(()=>CustomerModel.Mobile)" />
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@CustomerModel.Mobile" />
+                       
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="ReferredBy">ReferredBy #</label>
-                        <input type="text" class="form-control" id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
+                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
                         <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" />
                     </div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Customer</button>
             </div>
-            @* @if (displayValidationErrorMessages)
-            {
-                <div class="col-md-4" style="margin-top:10px">
-                    <label>Validation Messages: </label>
-                    <ValidationSummary />
-                </div>
-            } *@
+            
         </div>
 </EditForm>
 

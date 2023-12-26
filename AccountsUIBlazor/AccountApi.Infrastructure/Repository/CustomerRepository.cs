@@ -17,22 +17,12 @@ namespace AccountApi.Infrastructure.Repository
     public class CustomerRepository: ICustomerRepository
     {
 
-        #region ===[ Private Members ]=============================================================
-
         private readonly IConfiguration configuration;
-
-        #endregion
-
-        #region ===[ Constructor ]=================================================================
-
+       
         public CustomerRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
-
-        #endregion
-
-        #region ===[ ICustomerRepository Methods ]==================================================
 
         public async Task<IReadOnlyList<Customer>> GetAllAsync()
         {
@@ -84,7 +74,7 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-        #endregion
+       
 
     }
 }

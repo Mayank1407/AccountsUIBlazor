@@ -23,10 +23,24 @@ namespace AccountsUIBlazor
             // Add the IUnitOfWork as a scoped service
             services.AddTransient<IUnitOfWork, UnitOfWork>(); // Replace YourUnitOfWorkImplementation with the actual implementation class
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IVendorRepository, VendorRepository>();
+            services.AddScoped<ISalesRepository, SalesRepository>();
+            services.AddScoped<ICommissionAgentExpensesRepository, CommissionAgentExpensesRepository>(); 
+            services.AddScoped<ICommissionAgentPercentageRepository, CommissionAgentPercentageRepository>(); 
+            services.AddScoped<ICustomerPaymentReceivedRepository, CustomerPaymentReceivedRepository>();
+            services.AddScoped<IExpensesTypesRepository, ExpensesTypesRepository>();
+            services.AddScoped<IStockInRepository, StockInRepository>();
+            services.AddScoped<IVendorExpensesPaymentRepository, VendorExpensesPaymentRepository>();
+            services.AddScoped<IVendorPaymentRepository, VendorPaymentRepository>();
 
             // Add other services as needed
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddMvc(opt =>
+            {
+                opt.EnableEndpointRouting = false;
+            });
 
             // Add Swagger services
             services.AddSwaggerGen(c =>
@@ -61,8 +75,8 @@ namespace AccountsUIBlazor
                 client.BaseAddress = new Uri("https://localhost:7207/");
                 return client;
             });
+                
 
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

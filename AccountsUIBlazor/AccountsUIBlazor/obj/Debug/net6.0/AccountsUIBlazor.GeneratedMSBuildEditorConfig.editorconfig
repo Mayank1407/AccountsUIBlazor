@@ -24,12 +24,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQ3VzdG9tZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/AddVendor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVmVuZG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/Sales.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2FsZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/StockIn.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvY2tJbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Shared/SurveyPrompt.razor]

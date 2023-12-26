@@ -29,7 +29,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseMvcWithDefaultRoute();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
