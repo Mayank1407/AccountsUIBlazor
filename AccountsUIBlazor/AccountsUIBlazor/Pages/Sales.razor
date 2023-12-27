@@ -28,13 +28,17 @@
 <div class="col-md-8">
         To Date<RadzenDatePicker style="width: 100%;" Name="Todate" @bind-Value="UISales.UICalenderModel.ToDate" Change="DateSelection" />
 </div>
-<div>
-        <RadzenAutoComplete Placeholder="Select vendor stock in..." Data="@UISales.UIStockInList" TextProperty="LoadName" ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
+<div class="col-md-8 pt-1">
+        
+        <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UISales.UIStockInList" TextProperty="LoadName" ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
 </div>
 <div class="col-md-8">
-        <input type="text" class="form-control" id="Price" @bind-value="@UISales.UISalesPostDataModel.Quantity" placeholder="enter quantity." />
-        <input type="text" class="form-control" id="quantity" @bind-value="@UISales.UISalesPostDataModel.Price" placeholder="enter Price." @bind-value:event="CalculateAmount" />
-        <input type="text" class="form-control" id="Amount" @bind-value="@UISales.UISalesPostDataModel.Amount" placeholder="enter Amount." />
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter price." />
+        <label for="quantity">Quantity:</label>
+        <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter quantity." />
+        <label for="net">Total Amount:</label>
+        <input type="number" class="form-control" id="Amount" @bind="@UISales.UISalesPostDataModel.Amount" readonly />
 
  </div>
 <div>
@@ -74,10 +78,11 @@
         GetStockInData();
     }
 
-    public void CalculateAmount(ChangeEventArgs e)
+    public void CalculateAmount()
     {
-        var test = e.Value as string;
+       
         UISales.UISalesPostDataModel.Amount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
+        StateHasChanged();
     }
 
     public async Task GetStockInData()
