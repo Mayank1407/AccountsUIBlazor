@@ -4,7 +4,7 @@ namespace AccountApi.Core
 {
     public class Customer
     {
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -34,7 +34,7 @@ namespace AccountApi.Core
 
         public DateTime CreatedDate { get; set; }
 
-        public string Url { get; set; }
+        //public string Url { get; set; }
 
         public bool IsActive { get; set; }
     }
