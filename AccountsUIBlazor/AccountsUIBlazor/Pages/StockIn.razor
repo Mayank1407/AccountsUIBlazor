@@ -118,8 +118,8 @@
         string value = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
         userNameChanged(value);
         //UIStockIn.LoadName = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
+        StateHasChanged();
 
-        
         Log += UIStockIn.LoadName;
     }
     public void Submit(EditContext formContext)
