@@ -35,22 +35,23 @@ namespace AccountsUIBlazor.Controller
 
       
         [HttpGet]
-        public async Task<ApiResponse<List<Customer>>> GetAll()
+        public async Task<ApiResponse<List<UICustomer>>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<Customer>>();
+            var apiResponse = new ApiResponse<List<UICustomer>>();
 
             try
             {
                 var data = await _unitOfWork.Customers.GetAllAsync();
+                List<UICustomer> customerList = _IMapper.Map<List<UICustomer>>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data.ToList();
+                apiResponse.Result = customerList;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -62,23 +63,24 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet("{id}")]
-        public async  Task<ApiResponse<Customer>> GetById(int id)
+        public async  Task<ApiResponse<UICustomer>> GetById(int id)
         {
 
-            var apiResponse = new ApiResponse<Customer>();
+            var apiResponse = new ApiResponse<UICustomer>();
 
             try
             {
                 var data = await _unitOfWork.Customers.GetByIdAsync(id);
+                UICustomer customer = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = customer;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -94,77 +96,80 @@ namespace AccountsUIBlazor.Controller
         public async Task<IActionResult> Add(UICustomer Customer)
         {
           
-            var apiResponse = new ApiResponse<string>();
+            var apiResponse = new ApiResponse<UICustomer>();
             Customer customer = _IMapper.Map<Customer>(Customer);
             customer.IsActive = true;
 
             try
             {
                 var data = await _unitOfWork.Customers.AddAsync(customer);
+                UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = customerdata;
                
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return Ok(apiResponse);
         }
 
         [HttpPut]
-        public async Task<ApiResponse<string>> Update(Customer Customer)
+        public async Task<ApiResponse<UICustomer>> Update(Customer Customer)
         {
-            var apiResponse = new ApiResponse<string>();
+            var apiResponse = new ApiResponse<UICustomer>();
 
             try
             {
                 var data = await _unitOfWork.Customers.UpdateAsync(Customer);
+                UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = customerdata;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return apiResponse;
         }
 
         [HttpDelete]
-        public async Task<ApiResponse<string>> Delete(int id)
+        public async Task<ApiResponse<UICustomer>> Delete(int id)
         {
-            var apiResponse = new ApiResponse<string>();
+            var apiResponse = new ApiResponse<UICustomer>();
 
             try
             {
                 var data = await _unitOfWork.Customers.DeleteAsync(id);
+                UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = customerdata;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;

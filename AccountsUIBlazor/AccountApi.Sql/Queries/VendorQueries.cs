@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace AccountApi.Sql.Queries
 {
 	[ExcludeFromCodeCoverage]
-	public static class CustomerQueries
-	{
-		public static string AllCustomer => "SELECT * FROM [Customer] (NOLOCK)";
+	public static class VendorQueries
+    {
+		public static string AllCustomer => "SELECT * FROM [Vendor] (NOLOCK)";
 
-		public static string CustomerById => "SELECT * FROM [Customer] (NOLOCK) WHERE [CustomerId] = @CustomerId";
+		public static string CustomerById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [CustomerId] = @CustomerId";
 
 		public static string AddCustomer =>
-            @"INSERT INTO [dbo].[Customer]
+            @"INSERT INTO [dbo].[Vendor]
            ([FirstName]
            ,[MiddleName]
            ,[NickName]
@@ -26,6 +26,7 @@ namespace AccountApi.Sql.Queries
            ,[ModifiedDate]
            ,[CreatedDate]
            ,[ModifiedBy]
+           ,[Url]
            ,[IsActive])
      VALUES
            (@FirstName
@@ -38,16 +39,17 @@ namespace AccountApi.Sql.Queries
            ,@ModifiedDate
            ,@CreatedDate
            ,@ModifiedBy
+           ,@Url
            ,@IsActive)";
 
 		public static string UpdateCustomer =>
-			@"UPDATE [Customer] 
+            @"UPDATE [Vendor] 
             SET [FirstName] = @FirstName, 
 				[LastName] = @LastName, 
 				[Email] = @Email, 
 				[PhoneNumber] = @PhoneNumber
             WHERE [CustomerId] = @CustomerId";
 
-		public static string DeleteCustomer => "Update FROM [Customer] WHERE [CustomerId] = @CustomerId where isActive=0";
-    }
+		public static string DeleteCustomer => "Update FROM [Vendor] WHERE [VendorId] = @CustomerId where isActive=0";
+	}
 }

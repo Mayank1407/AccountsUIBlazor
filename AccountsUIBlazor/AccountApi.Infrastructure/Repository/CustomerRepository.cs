@@ -46,12 +46,24 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<string> AddAsync(Customer entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                entity.CreatedDate = DateTime.Now;
+                entity.ModifiedDate = DateTime.Now;
+
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
         public async Task<string> UpdateAsync(Customer entity)
