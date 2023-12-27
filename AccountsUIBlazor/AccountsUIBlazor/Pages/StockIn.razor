@@ -24,8 +24,8 @@
 </div> *@
 <EditForm Model="UIStockIn" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
 
-    <div>
-        select Vendor
+    <div class="col-md-8">
+        <label for="selectvendor">select Vendor #</label>
         <RadzenAutoComplete Placeholder="Select vendor..." Data="@UIStockIn.VendorNames" TextProperty="VendorName" ValueProperty="@UIStockIn.VendorId" Change="@OnChange" />
     </div>
     
@@ -35,15 +35,16 @@
     </div>
     <div class="row" style="margin-top:10px">
         <div class="col-md-12">
+            <label for="lastName">enter LoadName #</label>
+            <RadzenTextBox type="text" class="form-control" onkeydown="userNameChanged" id="LoadName" onchange="userNameChanged" @bind-value="@UIStockIn.LoadName" />
+            @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+        </div>
+        <div class="col-md-12">
             <label for="lastName">enter quantity #</label>
             <input type="text" class="form-control" id="lastName" @bind-value="@UIStockIn.Quantity" placeholder="enter last name..." />
             @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
         </div>
-        <div class="col-md-12">
-            <label for="lastName">enter LoadName #</label>
-            <input type="text" class="form-control" id="LoadName" @bind-value="@UIStockIn.LoadName" placeholder="enter LoadName name..." />
-            @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
-        </div>
+        
     </div>
 <div>
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
@@ -65,7 +66,10 @@
     // {
     //     return await HttpClient.GetFromJsonAsync<List<Coffee>>("Coffee/List");
     // }
-
+    private void userNameChanged(string value)
+    {
+        UIStockIn.LoadName = value;
+    }
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -105,12 +109,18 @@
     public async Task GetLoadValue()
     {
         // Log += "DateSelection fired. ";
+        DateTime dateAndTime = UIStockIn.CreatedDate;
+        var datevalue = dateAndTime.ToString("dd/MM/yyyy");
         var createdDate = UIStockIn.CreatedDate;
         var vendorid = UIStockIn.VendorId;
         var laodcount = await HttpClient.GetStringAsync($"StockIn/GetVendorLoadCount?vendorid={vendorid}&createdDate={createdDate}");
         Console.WriteLine(laodcount);
-        UIStockIn.LoadName = $" {UIStockIn.VendorName}_{UIStockIn.CreatedDate}LoadName_{ laodcount}";
+        string value = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
+        userNameChanged(value);
+        //UIStockIn.LoadName = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
 
+        
+        Log += UIStockIn.LoadName;
     }
     public void Submit(EditContext formContext)
     {

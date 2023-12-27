@@ -1,0 +1,122 @@
+﻿@page "/CustomerPayments"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+<h3>CustomerPayments</h3>
+
+
+<EditForm Model="UICustomerPayment" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+
+    <div class="col-md-8">
+        <label for="selectvendor">select Customer #</label>
+        <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerPayment.CustomerList" TextProperty="CustomerName" ValueProperty="@UICustomerPayment.CustomerId" Change="@OnChange" />
+    </div>
+    
+
+    <div class="col-md-8">
+        From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.PaymentDate" Change="DateSelection" />
+    </div>
+    <div class="col-md-12">
+        <label for="lastName">Amount paid #</label>
+        <input type="text" class="form-control" id="lastName" @bind-value="@UICustomerPayment.AmountPaid" placeholder="enter last name..." />
+        @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+    </div>
+    <div class="col-md-12">
+        <label for="lastName">comments</label>
+        <input type="text" class="form-control" id="comments" @bind-value="@UICustomerPayment.Comments" placeholder="enter last name..." />
+        @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+    </div>
+    
+<div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
+</div>
+</EditForm>
+@code {
+
+   // public UICalenderModel UICalenderModel { get; set; } = new();
+    public UICustomerPayment UICustomerPayment { get; set; } = new();
+    public string Log { get; set; } = "";
+    
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        // var results = await HttpClient.GetStringAsync($"StockIn/GetVendorNames");
+        var custList = await HttpClient.GetFromJsonAsync<List<CustomerList>>($"CustomerPayment/CustomerList");
+        //var APIreturn =  JsonConvert.DeserializeObject(results);
+        UICustomerPayment.CustomerList = custList;
+        //Console.WriteLine(Vendorname);
+    }
+    void OnChange(object value)
+    {
+
+        // var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        // UIStockIn.VendorId =  UIStockIn.VendorNames.Where(e => e.VendorName.Equals(value))
+        //                       .Select(p=> p.VendorId).FirstOrDefault();
+        // UIStockIn.VendorName = str.ToString();
+
+        // Console.WriteLine($"Value changed to {str}");
+    }
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    public void DropDownChanged()
+    {
+        Log += "DropDownChanged fired. ";
+    }
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+
+        var laodcount = GetLoadValue();
+        Console.WriteLine(laodcount);
+    }
+    public async Task GetLoadValue()
+    {
+        // // Log += "DateSelection fired. ";
+        // DateTime dateAndTime = UIStockIn.CreatedDate;
+        // var datevalue = dateAndTime.ToString("dd/MM/yyyy");
+        // var createdDate = UIStockIn.CreatedDate;
+        // var vendorid = UIStockIn.VendorId;
+        // var laodcount = await HttpClient.GetStringAsync($"StockIn/GetVendorLoadCount?vendorid={vendorid}&createdDate={createdDate}");
+        // Console.WriteLine(laodcount);
+        // string value = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
+        // userNameChanged(value);
+        // //UIStockIn.LoadName = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
+
+        
+        // Log += UIStockIn.LoadName;
+    }
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomerPayment)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UICustomerPayment = (UICustomerPayment)formContext.Model;
+
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"CustomerPayment/AddCustomerPayment", UICustomerPayment);
+            Console.WriteLine(obj);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+}
+ 
