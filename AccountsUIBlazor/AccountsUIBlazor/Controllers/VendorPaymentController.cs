@@ -14,7 +14,7 @@ namespace AccountsUIBlazor.Controller
 {
     [Route("[controller]")]
     [ApiController]
-    public class StockInController : BaseApiController
+    public class VendorPaymentController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
@@ -23,7 +23,7 @@ namespace AccountsUIBlazor.Controller
         /// <summary>
         /// Initialize StockInController by injecting an object type of IUnitOfWork
         /// </summary>
-        public StockInController(IUnitOfWork unitOfWork, IMapper Mapper)
+        public VendorPaymentController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
             this._IMapper = Mapper;
@@ -31,13 +31,13 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        public async Task<ApiResponse<List<StockIn>>> GetAll()
+        public async Task<ApiResponse<List<VendorPayment>>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<StockIn>>();
+            var apiResponse = new ApiResponse<List<VendorPayment>>();
 
             try
             {
-                var data = await _unitOfWork.StockIn.GetAllAsync();
+                var data = await _unitOfWork.VendorPayment.GetAllAsync();
                 apiResponse.Success = true;
                 apiResponse.Result = data.ToList();
             }
@@ -58,18 +58,18 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        [Route("GetVendorNames")]
+        [Route("GetVendorList")]
         public async Task<IActionResult> GetVendorList()
         {
 
-            //var apiResponse = new ApiResponse<List<VendorNames>>();
-            UIStockIn vendorNames = new UIStockIn();
+            //var apiResponse = new ApiResponse<List<VendorPayment>>();
+            //UIStockIn vendorNames = new UIStockIn();
             //Vendor.IsActive = true;
-            var Result = new List<VendorNames>();
+            var Result = new List<VendorList>();
             try
             {
-                 Result = new List<VendorNames> { new VendorNames { VendorId=1, VendorName="rams"},
-                    new VendorNames { VendorId = 2, VendorName = "rams1" } };
+                 Result = new List<VendorList> { new VendorList { VendorId=1, VendorName="ven"},
+                    new VendorList { VendorId = 2, VendorName = "ven1" } };
 
                 //  var data = await _unitOfWork.Vendor.GetAllAsync();
                 //var names = _IMapper.Map<List<VendorNames>>(data);
@@ -93,54 +93,16 @@ namespace AccountsUIBlazor.Controller
 
             return Ok(Result);
         }
-        [HttpPost]
-        [Route("PostStockInsAsPerVendorId")]
-        public async Task<IActionResult> PostStockInsAsPerVendorId(UIVendorCalenderModel UiCalenderModel)
-        {
-            List<UISalesStockInData> sales = new List<UISalesStockInData>();
-            //var apiResponse = new ApiResponse<string>();
-
-            //customer.IsActive = true;
-
-            try
-            {
-                //var data = await _unitOfWork.StockIn.GetStockInDataAsperDates(
-                //    UiCalenderModel.FromDate.ToString(),
-                //    UiCalenderModel .ToDate.ToString(), UiCalenderModel.VendorId);
-                sales.Add(new UISalesStockInData { LoadName = "load1", VendorId = 1, Quantity = 100, StockInId = 1 });
-                sales.Add(new UISalesStockInData { LoadName = "load2", VendorId = 2, Quantity = 700, StockInId = 2 });
-
-                //sales = _IMapper.Map<List<UISalesStockInData>>(data);
-
-                //apiResponse.Success = true;
-                //apiResponse.Result = data;
-
-            }
-            catch (Exception ex)
-            {
-                //apiResponse.Success = false;
-                //apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
-            }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
-
-            return Ok(sales);
-        }
 
         [HttpGet("{id}")]
-        public async  Task<ApiResponse<StockIn>> GetById(int id)
+        public async  Task<ApiResponse<VendorPayment>> GetById(int id)
         {
 
-            var apiResponse = new ApiResponse<StockIn>();
+            var apiResponse = new ApiResponse<VendorPayment>();
 
             try
             {
-                var data = await _unitOfWork.StockIn.GetByIdAsync(id);
+                var data = await _unitOfWork.VendorPayment.GetByIdAsync(id);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
             }
@@ -160,48 +122,20 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-        [HttpGet]
-        [Route("GetVendorLoadCount")]
-        public async Task<int> GetVendorLoadCount(int vendorid,string createdDate)
-        {
-
-            var apiResponse = new ApiResponse<StockIn>();
-
-            try
-            {
-                // var data = await _unitOfWork.StockIn.GetVendorLoadCount(vendorid, createdDate);
-                return 0;
-               // apiResponse.Success = true;
-               // apiResponse.Result = data;
-            }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
-            catch (Exception ex)
-            {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
-                Logger.Instance.Error("Exception:", ex);
-            }
-
-            return 0;
-        }
+        
 
         [HttpPost]
-        [Route("AddVendor")]
-        public async Task<IActionResult> Add(UIStockIn stockin)
+        [Route("AddVendorPayment")]
+        public async Task<IActionResult> AddVendorPayment(UIVendorPayment UIVendorPayment)
         {
           
             var apiResponse = new ApiResponse<string>();
-            StockIn stockinData = _IMapper.Map<StockIn>(stockin);
+            VendorPayment vendorPayment = _IMapper.Map<VendorPayment>(UIVendorPayment);
             //Vendor.IsActive = true;
 
             try
             {
-                var data = await _unitOfWork.StockIn.AddAsync(stockinData);
+                var data = await _unitOfWork.VendorPayment.AddAsync(vendorPayment);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
                
@@ -223,13 +157,13 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpPut]
-        public async Task<ApiResponse<string>> Update(StockIn stockIn)
+        public async Task<ApiResponse<string>> Update(UIVendorPayment vendorPayment)
         {
             var apiResponse = new ApiResponse<string>();
-
+            VendorPayment vendorpayment = _IMapper.Map<VendorPayment>(vendorPayment);
             try
             {
-                var data = await _unitOfWork.StockIn.UpdateAsync(stockIn);
+                var data = await _unitOfWork.VendorPayment.UpdateAsync(vendorpayment);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
             }
@@ -256,7 +190,7 @@ namespace AccountsUIBlazor.Controller
 
             try
             {
-                var data = await _unitOfWork.Vendor.DeleteAsync(id);
+                var data = await _unitOfWork.VendorPayment.DeleteAsync(id);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
             }
