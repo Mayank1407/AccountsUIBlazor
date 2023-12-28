@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [dbo].[Customer] (
+    [CustomerId] INT NOT NULL IDENTITY, 
     [FirstName]    NVARCHAR (MAX)   NULL,
     [MiddleName]   NVARCHAR (MAX)   NULL,
     [NickName]     NVARCHAR (MAX)   NULL,
@@ -10,7 +11,7 @@
     [CreatedDate]  DATETIME         CONSTRAINT [DF_Customer_modifiedDate1] DEFAULT (getdate()) NOT NULL,
     [ModifiedBy]   NVARCHAR (500)   NULL,
     [IsActive]     BIT              CONSTRAINT [DF_Customer_IsActive] DEFAULT ((1)) NULL,
-    [CustomerId] INT NOT NULL, 
+   
     CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([CustomerId])
 );
 

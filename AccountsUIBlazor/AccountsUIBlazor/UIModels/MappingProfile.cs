@@ -1,4 +1,5 @@
 ﻿using AccountApi.Core;
+using AccountApi.Core.Entities;
 using AutoMapper;
 
 namespace AccountsUIBlazor.UIModels
@@ -17,6 +18,7 @@ namespace AccountsUIBlazor.UIModels
 
             CreateMap<UISales, Sales>().ReverseMap();
             CreateMap<UIStockIn, UISalesStockInData>().ReverseMap();
+            CreateMap<SalesDetailsDto, SalesDetails>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();

@@ -1,8 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AccountApi.Core
+namespace AccountApi.Core.Entities
 {
-    public class Sales
+    public class SalesDetails
     {
         public int SalesId { get; set; }
         public int VendorId { get; set; }
@@ -12,11 +16,11 @@ namespace AccountApi.Core
         public int Price { get; set; }
         public int Total { get; set; }
         public string Type { get; set; }
+        public string CustomerName { get; set; }
+        public string VendorName { get; set; }
+        public string LoadName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime LastModifiedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public bool IsActive { get; set; }
-        public string LoggedInUser { get; set; }
+       
 
     }
 }

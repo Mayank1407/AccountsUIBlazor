@@ -69,7 +69,7 @@
     <Build Include="dbo\Tables\CommissionEarned.sql" />
     <Build Include="dbo\Tables\CommissionPercentage.sql" />
     <Build Include="dbo\Tables\CustomerDetails.sql" />
-    <Build Include="dbo\Tables\CustomerPayments.sql" />
+    <Build Include="dbo\Tables\CustomerPaymentReceived.sql" />
     <Build Include="dbo\Tables\Expenses.sql" />
     <Build Include="dbo\Tables\Sales.sql" />
     <Build Include="dbo\Tables\SalesReturns.sql" />
@@ -80,5 +80,8 @@
     <Build Include="dbo\Tables\VendorDetails.sql" />
     <Build Include="dbo\Tables\VendorExpenses.sql" />
     <Build Include="dbo\Tables\VendorPayments.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AccountsDbProject.refactorlog" />
   </ItemGroup>
 </Project>

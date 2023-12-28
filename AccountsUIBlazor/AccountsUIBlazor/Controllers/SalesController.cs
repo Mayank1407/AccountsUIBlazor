@@ -1,6 +1,7 @@
 ﻿using AccontApi.Core;
 using AccountApi.Application.Interfaces;
 using AccountApi.Core;
+using AccountApi.Core.Entities;
 using AccountApi.Logging;
 using AccountsUIBlazor.Data;
 using AccountsUIBlazor.UIModels;
@@ -20,12 +21,6 @@ namespace AccountsUIBlazor.Controller
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
-
-
-        
-        /// <summary>
-        /// Initialize CustomerController by injecting an object type of IUnitOfWork
-        /// </summary>
         public SalesController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
@@ -45,12 +40,12 @@ namespace AccountsUIBlazor.Controller
                 apiResponse.Success = true;
                 apiResponse.Result = data.ToList();
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -96,7 +91,7 @@ namespace AccountsUIBlazor.Controller
           
             var apiResponse = new ApiResponse<string>();
             Sales sales = _IMapper.Map<Sales>(uiSales);
-            //customer.IsActive = true;
+           
 
             try
             {
@@ -105,18 +100,18 @@ namespace AccountsUIBlazor.Controller
                 apiResponse.Result = data;
                
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return Ok(apiResponse);
         }
@@ -242,6 +237,35 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-        
+        [HttpGet]
+        [Route("GetSalesDataAsPerStockInId")]
+        public async Task<IActionResult> GetSalesDataAsPerStockInId(int stockInId)
+        {
+            var apiResponse = new ApiResponse<List<SalesDetailsDto>>();
+            try
+            {
+                var data = await _unitOfWork.Sales.GetSalesDataAsPerStockInId(stockInId);
+               List<SalesDetailsDto> results = _IMapper.Map<List<SalesDetailsDto>>(data);
+                apiResponse.Success = true;
+                apiResponse.Result = results;
+
+            }
+            catch (SqlException ex)
+            {
+                //apiResponse.Success = false;
+                //apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return Ok(apiResponse);
+        }
+
+
     }
 }

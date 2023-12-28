@@ -3,6 +3,7 @@ using AccountApi.Application.Interfaces;
 using AccountApi.Core;
 using AccountApi.Logging;
 using AccountsUIBlazor.Data;
+using AccountsUIBlazor.Pages;
 using AccountsUIBlazor.UIModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,6 @@ namespace AccountsUIBlazor.Controller
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
 
-
-        /// <summary>
-        /// Initialize StockInController by injecting an object type of IUnitOfWork
-        /// </summary>
         public StockInController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
@@ -31,22 +28,23 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        public async Task<ApiResponse<List<StockIn>>> GetAll()
+        public async Task<ApiResponse<List<UIStockIn>>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<StockIn>>();
+            var apiResponse = new ApiResponse<List<UIStockIn>>();
 
             try
             {
                 var data = await _unitOfWork.StockIn.GetAllAsync();
                 apiResponse.Success = true;
-                apiResponse.Result = data.ToList();
+                List<UIStockIn> stockinData = _IMapper.Map<List<UIStockIn>>(data);
+                apiResponse.Result = stockinData;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -133,23 +131,24 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet("{id}")]
-        public async  Task<ApiResponse<StockIn>> GetById(int id)
+        public async  Task<ApiResponse<UIStockIn>> GetById(int id)
         {
 
-            var apiResponse = new ApiResponse<StockIn>();
+            var apiResponse = new ApiResponse<UIStockIn>();
 
             try
             {
                 var data = await _unitOfWork.StockIn.GetByIdAsync(id);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                UIStockIn stockinData = _IMapper.Map<UIStockIn>(data);
+                apiResponse.Result = stockinData;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -165,7 +164,7 @@ namespace AccountsUIBlazor.Controller
         public async Task<int> GetVendorLoadCount(int vendorid,string createdDate)
         {
 
-            var apiResponse = new ApiResponse<StockIn>();
+            var apiResponse = new ApiResponse<AccountApi.Core.StockIn>();
 
             try
             {
@@ -195,56 +194,60 @@ namespace AccountsUIBlazor.Controller
         public async Task<IActionResult> Add(UIStockIn stockin)
         {
           
-            var apiResponse = new ApiResponse<string>();
-            StockIn stockinData = _IMapper.Map<StockIn>(stockin);
+            var apiResponse = new ApiResponse<UIStockIn>();
+            AccountApi.Core.StockIn stockinData = _IMapper.Map<AccountApi.Core.StockIn>(stockin);
             //Vendor.IsActive = true;
 
             try
             {
                 var data = await _unitOfWork.StockIn.AddAsync(stockinData);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                UIStockIn stockinDataresults = _IMapper.Map<UIStockIn>(data);
+                apiResponse.Result = stockinDataresults;
                
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return Ok(apiResponse);
         }
 
         [HttpPut]
-        public async Task<ApiResponse<string>> Update(StockIn stockIn)
+        public async Task<ApiResponse<UIStockIn>> Update(UIStockIn uIStockIn)
         {
-            var apiResponse = new ApiResponse<string>();
+            var apiResponse = new ApiResponse<UIStockIn>();
 
             try
             {
-                var data = await _unitOfWork.StockIn.UpdateAsync(stockIn);
+                AccountApi.Core.StockIn stockinData = _IMapper.Map<AccountApi.Core.StockIn>(uIStockIn);
+                var data = await _unitOfWork.StockIn.UpdateAsync(stockinData);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+
+                UIStockIn stockinDataresults = _IMapper.Map<UIStockIn>(data);
+                apiResponse.Result = stockinDataresults;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return apiResponse;
         }

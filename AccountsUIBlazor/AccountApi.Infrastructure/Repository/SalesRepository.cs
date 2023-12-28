@@ -79,7 +79,17 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-       
+        public async Task<List<SalesDetails>> GetSalesDataAsPerStockInId(int stockInId)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<List<SalesDetails>>(SalesQueries.GetSalesDataAsPerStockInId, new { stockInId  });
+                return (List<SalesDetails>)result;
+            }
+        }
+
+
 
     }
 }
